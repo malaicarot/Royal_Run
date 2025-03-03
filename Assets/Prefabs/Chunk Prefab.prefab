@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1223750737591455854}
+  - component: {fileID: -2883851501217962158}
   m_Layer: 0
   m_Name: Chunk Prefab
   m_TagString: Untagged
@@ -36,6 +37,25 @@ Transform:
   - {fileID: 2491329414742147498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2883851501217962158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3823864561415990359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9256f347e99d0c40892d194e831a70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fencePrefab: {fileID: 1460202313907192712, guid: 24f409aa4f0da034da377dc06d7824ab, type: 3}
+  applePrefab: {fileID: 7330009822224280591, guid: 105f855e6ab4a9040a2078e0c1cf7b42, type: 3}
+  coinPrefab: {fileID: 3264673257683873864, guid: 457b8c6e722f43c4ba699e35f45f2673, type: 3}
+  lanes:
+  - -2.5
+  - 0
+  - 2.5
 --- !u!1 &6497138977110651775
 GameObject:
   m_ObjectHideFlags: 0
