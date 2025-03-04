@@ -32,6 +32,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 4129cfb1f3811cd4e8558ada2c3f9bd7, type: 2}
+    - target: {fileID: 4112680761285502851, guid: d79cb4ec6a53ac14c9b77c9ace7327d2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6552071011932584929, guid: d79cb4ec6a53ac14c9b77c9ace7327d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -75,6 +79,10 @@ PrefabInstance:
     - target: {fileID: 8297427850115300800, guid: d79cb4ec6a53ac14c9b77c9ace7327d2, type: 3}
       propertyPath: m_Name
       value: Cart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8297427850115300800, guid: d79cb4ec6a53ac14c9b77c9ace7327d2, type: 3}
+      propertyPath: m_TagString
+      value: Falling
       objectReference: {fileID: 0}
     - target: {fileID: 8959291800167796532, guid: d79cb4ec6a53ac14c9b77c9ace7327d2, type: 3}
       propertyPath: m_Drag

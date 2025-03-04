@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         movement = context.ReadValue<Vector2>();
-        Debug.Log(movement);
     }
 
     void FixedUpdate()
@@ -29,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 currentPosition = playerRb.position;
         Vector3 direction = new Vector3(movement.x, 0f, movement.y);
         Vector3 movePosition = currentPosition + direction * Time.deltaTime * moveSpeed;
-
 
         movePosition.x = Mathf.Clamp(movePosition.x , -xValueClamp, zValueClamp);
         movePosition.z = Mathf.Clamp(movePosition.z , -zValueClamp, zValueClamp);
