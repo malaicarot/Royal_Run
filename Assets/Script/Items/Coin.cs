@@ -1,10 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class Coin : PickUp
 {
-     protected override void OnPickUp()
+    protected override void OnPickUp()
     {
-        Debug.Log("Add 100 points!");
-
+        ScoreManagers.ScoreManagerSingleton.AddScore(10);
     }
 }

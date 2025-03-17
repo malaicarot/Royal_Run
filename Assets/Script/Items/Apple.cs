@@ -3,6 +3,8 @@ using UnityEngine;
 public class Apple : PickUp
 {
     LevelGenerator levelGenerator;
+    [SerializeField] float speedUp = 2;
+    
 
     void Start()
     {
@@ -11,7 +13,8 @@ public class Apple : PickUp
 
     protected override void OnPickUp()
     {
-        levelGenerator.ChangeMoveSpeed(2);
+        levelGenerator.ChangeMoveSpeed(speedUp);
+        ScoreManagers.ScoreManagerSingleton.AddScore(5);
         Debug.Log("Add 50 points!");
     }
 }

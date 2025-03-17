@@ -5,15 +5,23 @@ using UnityEngine.UIElements;
 
 public class LevelGenerator : MonoBehaviour
 {
+
+    [Header("References")]
     [SerializeField] CameraLensFOV cameraController;
     [SerializeField] GameObject chunkPrefab;
     [SerializeField] Transform chunkParent;
-    [SerializeField] int chunkQuantity = 12;
-    [SerializeField] int chunkDistance = 10;
 
+    [Header("Level Settings")]
+    [Tooltip("The amount of chunks we start with")]
+    [SerializeField] int chunkQuantity = 12;
+    [Tooltip("Do not change chunk length value unless chunk prefab size reflects change")]
+    [SerializeField] int chunkDistance = 10;
     List<GameObject> chunks = new List<GameObject>();
     [SerializeField] float movementSpeed = 8f;
     [SerializeField] float minMovementSpeed = 2f;
+    [SerializeField] float maxMovementSpeed = 20f;
+    [SerializeField] float minGravity = -22f;
+    [SerializeField] float maxGravity = -2f;
 
 
 
@@ -29,13 +37,17 @@ public class LevelGenerator : MonoBehaviour
 
     public void ChangeMoveSpeed(float speedAmount)
     {
-        movementSpeed += speedAmount;
-        if (movementSpeed <= minMovementSpeed)
+        float newMoveSpeed = movementSpeed + speedAmount;
+        newMoveSpeed = Mathf.Clamp(newMoveSpeed, minMovementSpeed, maxMovementSpeed);
+        if (newMoveSpeed != movementSpeed)
         {
-            movementSpeed = minMovementSpeed;
+            movementSpeed = newMoveSpeed;
+            float newGravity = Physics.gravity.z - speedAmount;
+            newGravity = Mathf.Clamp(newGravity, minGravity, maxGravity);
+            Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, newGravity);
+            cameraController.ChangeCameraFOV(speedAmount);
+
         }
-        Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - speedAmount);
-        cameraController.ChangeCameraFOV(speedAmount);
     }
 
     void ChunkGenerator()

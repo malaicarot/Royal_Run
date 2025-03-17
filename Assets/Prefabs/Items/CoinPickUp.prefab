@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183d5d8c017011d448630b9db49a1d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textMeshProUGUI: {fileID: 0}
+  score: 100
   rotationSpeed: 100
 --- !u!65 &1012131930615776665
 BoxCollider:
