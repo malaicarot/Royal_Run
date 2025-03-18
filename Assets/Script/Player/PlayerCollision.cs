@@ -25,7 +25,7 @@ public class PlayerCollision : MonoBehaviour
         if (timer < countDown) return;
         levelGenerator.ChangeMoveSpeed(speedDown);
         animator.SetTrigger(hitString);
-        GameManagers.ScoreManagerSingleton.AddScore(-5);
+        GameManagers.ManagerSingleton.AddScore(-5);
         timer = 0;
     }
 }

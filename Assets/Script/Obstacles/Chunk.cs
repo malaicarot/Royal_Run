@@ -13,9 +13,9 @@ public class Chunk : MonoBehaviour
     [SerializeField] float[] lanes = { -2.5f, 0, 2.5f };
     List<int> availableLane = new List<int>() { 0, 1, 2 };
 
-    float coinPercentage = 0.5f;
-    float applePercentage = 0.3f;
-    float zPositionValueCoin = 2;
+    [SerializeField] float coinPercentage = 0.5f;
+    [SerializeField] float applePercentage = 0.3f;
+    [SerializeField] float zPositionValueCoin = 2;
 
     void Start()
     {

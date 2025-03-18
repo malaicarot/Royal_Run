@@ -5,8 +5,8 @@ public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] obstacle;
     [SerializeField] Transform parent;
-    [SerializeField] int quantity = 5;
     [SerializeField] float waitTime = 1;
+    [SerializeField] float minObstacleSpawnTime = 0.2f;
     [SerializeField] float xPosition = 2;
 
 
@@ -17,6 +17,13 @@ public class ObstacleSpawner : MonoBehaviour
 
     void Spawner(){
         StartCoroutine(WaitForSpawn());
+    }
+
+    public void DecreaseObstacleSpawnTime(float amount){
+        waitTime -= amount;
+        if(waitTime < minObstacleSpawnTime){
+            waitTime = minObstacleSpawnTime;
+        }
     }
     IEnumerator WaitForSpawn(){
         while (true)

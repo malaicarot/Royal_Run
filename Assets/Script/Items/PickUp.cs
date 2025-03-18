@@ -1,10 +1,8 @@
-using NUnit.Framework.Constraints;
-using TMPro;
+
 using UnityEngine;
 
 public abstract class PickUp : MonoBehaviour
 {
-    [SerializeField] float score = 0;
     [SerializeField] float rotationSpeed = 100f;
     const string playerTag = "Player";
     void Update()

@@ -5,6 +5,6 @@ public class Coin : PickUp
 {
     protected override void OnPickUp()
     {
-        // Managers.ScoreManagerSingleton.AddScore(10);
+        GameManagers.ManagerSingleton.AddScore(10);
     }
 }

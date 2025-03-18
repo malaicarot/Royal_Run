@@ -8,7 +8,8 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("References")]
     [SerializeField] CameraLensFOV cameraController;
-    [SerializeField] GameObject chunkPrefab;
+    [SerializeField] GameObject[] chunkPrefabs;
+    [SerializeField] GameObject chunkCheckPointPrefab;
     [SerializeField] Transform chunkParent;
 
     [Header("Level Settings")]
@@ -23,8 +24,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] float minGravity = -22f;
     [SerializeField] float maxGravity = -2f;
 
-
-
+    int chunkCount = 0;
+    int chunkInterval = 8;
 
     void Start()
     {
@@ -52,12 +53,9 @@ public class LevelGenerator : MonoBehaviour
 
     void ChunkGenerator()
     {
-
         for (int i = 0; i < chunkQuantity; i++)
         {
-
             SpawnChunk(CalculatePosition());
-
         }
     }
 
@@ -67,13 +65,13 @@ public class LevelGenerator : MonoBehaviour
         {
             GameObject chunkObject = chunks[i];
             chunkObject.transform.Translate(-transform.forward * (movementSpeed * Time.deltaTime));
-            if (chunkObject.transform.position.z <= Camera.main.transform.position.z)
+            if (chunkObject.transform.position.z <= Camera.main.transform.position.z - 5f)
             {
                 chunks.Remove(chunkObject);
                 Destroy(chunkObject);
                 SpawnChunk(CalculatePosition());
-
             }
+
         }
     }
 
@@ -87,15 +85,28 @@ public class LevelGenerator : MonoBehaviour
         }
         else
         {
+
             zPosition = chunks[chunks.Count - 1].transform.position.z + chunkDistance;
         }
         return zPosition;
     }
 
+    GameObject ChunkToSpawn()
+    {
+        if (chunkCount % chunkInterval == 0 && chunkCount != 0)
+        {
+            chunkCount = 0;
+            return chunkCheckPointPrefab;
+        }
+        GameObject chunkToSpanw = chunkPrefabs[Random.Range(0, chunkPrefabs.Length)];
+        return chunkToSpanw;
+    }
+
     void SpawnChunk(float zValue)
     {
+        chunkCount++;
         Vector3 direction = new Vector3(0, 0, zValue);
-        GameObject newchunkGO = Instantiate(chunkPrefab, direction, Quaternion.identity, chunkParent);
+        GameObject newchunkGO = Instantiate(ChunkToSpawn(), direction, Quaternion.identity, chunkParent);
         chunks.Add(newchunkGO);
         Chunk newChunk = newchunkGO.GetComponent<Chunk>();
         newChunk.Init(this);

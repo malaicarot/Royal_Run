@@ -13,7 +13,6 @@ public class Apple : PickUp
     protected override void OnPickUp()
     {
         levelGenerator.ChangeMoveSpeed(speedUp);
-        // Managers.ScoreManagerSingleton.AddScore(5);
-        Debug.Log("Add 50 points!");
+        GameManagers.ManagerSingleton.AddScore(5);
     }
 }
