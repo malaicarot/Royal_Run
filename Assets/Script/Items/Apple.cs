@@ -5,16 +5,15 @@ public class Apple : PickUp
     LevelGenerator levelGenerator;
     [SerializeField] float speedUp = 2;
     
-
-    void Start()
+    public void Init(LevelGenerator levelGenerator)
     {
-        levelGenerator = FindFirstObjectByType<LevelGenerator>();
+        this.levelGenerator = levelGenerator;
     }
 
     protected override void OnPickUp()
     {
         levelGenerator.ChangeMoveSpeed(speedUp);
-        ScoreManagers.ScoreManagerSingleton.AddScore(5);
+        // Managers.ScoreManagerSingleton.AddScore(5);
         Debug.Log("Add 50 points!");
     }
 }

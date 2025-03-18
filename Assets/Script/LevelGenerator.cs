@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
+// using Unity.Burst.Intrinsics;
 using UnityEngine;
-using UnityEngine.UIElements;
+// using UnityEngine.UIElements;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -95,7 +95,9 @@ public class LevelGenerator : MonoBehaviour
     void SpawnChunk(float zValue)
     {
         Vector3 direction = new Vector3(0, 0, zValue);
-        GameObject newchunk = Instantiate(chunkPrefab, direction, Quaternion.identity, chunkParent);
-        chunks.Add(newchunk);
+        GameObject newchunkGO = Instantiate(chunkPrefab, direction, Quaternion.identity, chunkParent);
+        chunks.Add(newchunkGO);
+        Chunk newChunk = newchunkGO.GetComponent<Chunk>();
+        newChunk.Init(this);
     }
 }
