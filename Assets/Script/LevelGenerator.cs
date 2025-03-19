@@ -44,6 +44,7 @@ public class LevelGenerator : MonoBehaviour
         if (newMoveSpeed != movementSpeed)
         {
             playerMovement.ChangeSpeed(speedAmount);
+            playerMovement.ChangeJumpForce(speedAmount);
             movementSpeed = newMoveSpeed;
             float newGravity = Physics.gravity.z - speedAmount;
             newGravity = Mathf.Clamp(newGravity, minGravity, maxGravity);

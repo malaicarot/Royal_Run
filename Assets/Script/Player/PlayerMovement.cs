@@ -10,11 +10,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] float jumpTimer = 0;
     [SerializeField] float jumpDuration = 0.5f;
+    [SerializeField] float minJumpForce = 4f;
+    [SerializeField] float maxJumpForce = 1.5f;
+    [SerializeField] float jumpForceChange = 0.2f;
+
+
 
     [SerializeField] float xValueClamp;
     [SerializeField] float zValueClamp;
     Vector2 movement;
-    bool jump = false;
+    bool jump;
     Rigidbody playerRb;
     Vector3 currentPos;
 
@@ -33,12 +38,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            if (!jump)
-            {
+            // if (!jump)
+            // {
                 jump = true;
                 jumpTimer = 0;
                 currentPos = transform.position;
-            }
+            // }
         }
     }
 
@@ -52,6 +57,16 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed += amount;
         moveSpeed = Mathf.Clamp(moveSpeed, minMoveSpeed, maxMoveSpeed);
+    }
+
+    public void ChangeJumpForce(float amount){
+        if(amount > 0){
+            jumpForce += jumpForceChange;
+        }else{
+            jumpForce -= jumpForceChange;
+        }
+
+        jumpForce = Math.Clamp(jumpForce, minJumpForce, maxJumpForce);
     }
 
     void ProcessJump()
