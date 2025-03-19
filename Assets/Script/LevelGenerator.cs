@@ -11,6 +11,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] GameObject[] chunkPrefabs;
     [SerializeField] GameObject chunkCheckPointPrefab;
     [SerializeField] Transform chunkParent;
+    [SerializeField] PlayerMovement playerMovement;
 
     [Header("Level Settings")]
     [Tooltip("The amount of chunks we start with")]
@@ -42,6 +43,7 @@ public class LevelGenerator : MonoBehaviour
         newMoveSpeed = Mathf.Clamp(newMoveSpeed, minMovementSpeed, maxMovementSpeed);
         if (newMoveSpeed != movementSpeed)
         {
+            playerMovement.ChangeSpeed(speedAmount);
             movementSpeed = newMoveSpeed;
             float newGravity = Physics.gravity.z - speedAmount;
             newGravity = Mathf.Clamp(newGravity, minGravity, maxGravity);

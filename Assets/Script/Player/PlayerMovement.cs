@@ -1,16 +1,26 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
+    [SerializeField] float minMoveSpeed;
+    [SerializeField] float maxMoveSpeed;
+    [SerializeField] float jumpForce;
+    [SerializeField] float jumpTimer = 0;
+    [SerializeField] float jumpDuration = 0.5f;
+
     [SerializeField] float xValueClamp;
     [SerializeField] float zValueClamp;
     Vector2 movement;
+    bool jump = false;
     Rigidbody playerRb;
+    Vector3 currentPos;
 
-    void   Awake() 
-   
+
+    void Awake()
+
     {
         playerRb = GetComponent<Rigidbody>();
     }
@@ -19,19 +29,59 @@ public class PlayerMovement : MonoBehaviour
         movement = context.ReadValue<Vector2>();
     }
 
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (!jump)
+            {
+                jump = true;
+                jumpTimer = 0;
+                currentPos = transform.position;
+            }
+        }
+    }
+
     void FixedUpdate()
     {
         ProccessMove();
+        ProcessJump();
     }
 
-    void ProccessMove(){
+    public void ChangeSpeed(float amount)
+    {
+        moveSpeed += amount;
+        moveSpeed = Mathf.Clamp(moveSpeed, minMoveSpeed, maxMoveSpeed);
+    }
+
+    void ProcessJump()
+    {
+        if (jump)
+        {
+            jumpTimer += Time.deltaTime;
+            float duration = jumpTimer / jumpDuration;
+            if (duration >= 1f)
+            {
+                jump = false;
+                transform.position = currentPos;
+            }
+            else
+            {
+                float jumpOffset = Mathf.Sin(duration * MathF.PI) * jumpForce;
+                transform.position = new Vector3(currentPos.x, currentPos.y + jumpOffset, currentPos.z);
+            }
+        }
+    }
+
+    void ProccessMove()
+    {
         Vector3 currentPosition = playerRb.position;
         Vector3 direction = new Vector3(movement.x, 0f, movement.y);
         Vector3 movePosition = currentPosition + direction * Time.deltaTime * moveSpeed;
 
-        movePosition.x = Mathf.Clamp(movePosition.x , -xValueClamp, zValueClamp);
-        movePosition.z = Mathf.Clamp(movePosition.z , -zValueClamp, zValueClamp);
-        
+        movePosition.x = Mathf.Clamp(movePosition.x, -xValueClamp, zValueClamp);
+        movePosition.z = Mathf.Clamp(movePosition.z, -zValueClamp, zValueClamp);
+
         playerRb.MovePosition(movePosition);
     }
 }
