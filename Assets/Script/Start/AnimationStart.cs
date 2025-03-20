@@ -21,6 +21,8 @@ public class AnimationStart : MonoBehaviour
             timer += Time.deltaTime;
             currentTime = Mathf.Lerp(0f, blendFloat, timer / duration);
             animator.SetFloat("Blend", currentTime);
+        }else{
+            return;
         }
     }
 }

@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float zValueClamp;
     Vector2 movement;
     bool jump;
+    bool isPause = false;
     Rigidbody playerRb;
     Vector3 currentPos;
 
@@ -38,12 +39,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            // if (!jump)
-            // {
-                jump = true;
-                jumpTimer = 0;
-                currentPos = transform.position;
-            // }
+            jump = true;
+            jumpTimer = 0;
+            currentPos = transform.position;
+        }
+    }
+
+       public void Pause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            isPause = !isPause;
+            if(isPause){
+                GameManagers.ManagerSingleton.ActivePause();
+            }else{
+                GameManagers.ManagerSingleton.Countinue();
+            }
         }
     }
 

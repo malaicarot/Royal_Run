@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagers : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManagers : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI gameOverText;
+
+    [SerializeField] GameObject PauseMenus;
 
     int score = 0;
 
@@ -21,6 +24,11 @@ public class GameManagers : MonoBehaviour
 
     void Awake()
     {
+        if (SceneManager.GetActiveScene().name == "StartScene")
+        {
+            Destroy(gameObject);
+            return;
+        }
         if (ManagerSingleton == null)
         {
             ManagerSingleton = this;
@@ -28,7 +36,7 @@ public class GameManagers : MonoBehaviour
         }
         else
         {
-            Destroy(ManagerSingleton);
+            Destroy(gameObject);
         }
     }
 
@@ -44,20 +52,21 @@ public class GameManagers : MonoBehaviour
 
     public void AddScore(int _score)
     {
-        if(timeOut) return;
+        if (timeOut) return;
 
         score += _score;
         scoreText.text = $"{score}";
     }
 
-    public void AddTime(){
+    public void AddTime()
+    {
         leftTime += timeAdded;
 
     }
 
     void TimeCountDown()
     {
-        if(timeOut) return;
+        if (timeOut) return;
 
         leftTime -= Time.deltaTime;
         timeText.text = leftTime.ToString("F1");
@@ -73,5 +82,23 @@ public class GameManagers : MonoBehaviour
         playerMovement.enabled = false;
         Time.timeScale = .1f;
         gameOverText.gameObject.SetActive(true);
+    }
+
+    public void ActivePause()
+    {
+        Time.timeScale = 0f;
+        PauseMenus.SetActive(true);
+    }
+    public void Countinue()
+    {
+        Time.timeScale = 1f;
+        PauseMenus.SetActive(false);
+    }
+
+    public void MainMenu()
+    {
+        Destroy(this);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 }
