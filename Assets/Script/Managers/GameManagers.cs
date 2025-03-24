@@ -1,3 +1,4 @@
+using System.Collections;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
@@ -11,10 +12,13 @@ public class GameManagers : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI gameOverText;
-
     [SerializeField] GameObject PauseMenus;
+    [SerializeField] string startScene = "StartScene";
+    [SerializeField] string endScene = "EndScene";
+    [SerializeField] string mainScene = "MainScene";
 
     int score = 0;
+    int highestScore = 0;
 
     [SerializeField] float startTime = 5f;
     [SerializeField] float timeAdded = 5f;
@@ -24,7 +28,7 @@ public class GameManagers : MonoBehaviour
 
     void Awake()
     {
-        if (SceneManager.GetActiveScene().name == "StartScene")
+        if (SceneManager.GetActiveScene().name == startScene)
         {
             Destroy(gameObject);
             return;
@@ -43,11 +47,21 @@ public class GameManagers : MonoBehaviour
     void Start()
     {
         leftTime = startTime;
+        GetHighestScore();
+        SoundManagers.soundManagersSingleTon.BackgroundMusic();
+        
+
     }
 
     void Update()
     {
         TimeCountDown();
+    }
+
+    void GetHighestScore()
+    {
+        int savedScore = PlayerPrefs.GetInt("PlayerScore", 0);
+        highestScore = savedScore;
     }
 
     public void AddScore(int _score)
@@ -61,7 +75,6 @@ public class GameManagers : MonoBehaviour
     public void AddTime()
     {
         leftTime += timeAdded;
-
     }
 
     void TimeCountDown()
@@ -82,6 +95,10 @@ public class GameManagers : MonoBehaviour
         playerMovement.enabled = false;
         Time.timeScale = .1f;
         gameOverText.gameObject.SetActive(true);
+        SaveScore();
+        StartCoroutine(waitForLoadScene());
+
+
     }
 
     public void ActivePause()
@@ -100,5 +117,41 @@ public class GameManagers : MonoBehaviour
         Destroy(this);
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+    }
+
+    public void ReloadMainScene()
+    {
+        Destroy(this);
+        SceneManager.LoadScene(mainScene);
+        GetHighestScore();
+    }
+
+    public void DeleteScore()
+    {
+        PlayerPrefs.DeleteKey("PlayerScore");
+    }
+
+    IEnumerator waitForLoadScene()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(endScene);
+    }
+
+    void SaveScore()
+    {
+        int higherScore = Mathf.Max(score, highestScore);
+        PlayerPrefs.SetInt("PlayerScore", higherScore);
+        PlayerPrefs.Save();
+    }
+
+    public int HighestScore()
+    {
+        return highestScore;
+
+    }
+    public int CurrentScore()
+    {
+        return score;
     }
 }

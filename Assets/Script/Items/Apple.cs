@@ -14,5 +14,6 @@ public class Apple : PickUp
     {
         levelGenerator.ChangeMoveSpeed(speedUp);
         GameManagers.ManagerSingleton.AddScore(5);
+        SoundManagers.soundManagersSingleTon.SFXSound(0);
     }
 }
