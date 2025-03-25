@@ -344,6 +344,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0a470a70f22c2544ea69dbcecddcd858, type: 3}
   - {fileID: 8300000, guid: b025affaac4800d46a478597f6621056, type: 3}
   soundVolume: 0
+  SFXVolume: 0
 --- !u!82 &94346714
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2306,7 +2307,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 94346713}
+        m_TargetAssemblyTypeName: SoundManagers, Assembly-CSharp
+        m_MethodName: SettingSFXVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1452815607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,7 +2583,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1327396369}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1797045803}
+        m_TargetAssemblyTypeName: ButtonManagers, Assembly-CSharp
+        m_MethodName: DeleteScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1545559004
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,6 +3198,7 @@ MonoBehaviour:
   indexMainScene: 1
   settingsPanel: {fileID: 1068979217}
   backgroundMusicSlider: {fileID: 290025863}
+  SFXSlider: {fileID: 1449938175}
 --- !u!1 &1798720051
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,20 +39,27 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            jump = true;
-            jumpTimer = 0;
-            currentPos = transform.position;
+            if (!jump)
+            {
+                jump = true;
+                jumpTimer = 0;
+                currentPos = transform.position;
+            }
+
         }
     }
 
-       public void Pause(InputAction.CallbackContext context)
+    public void Pause(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             isPause = !isPause;
-            if(isPause){
+            if (isPause)
+            {
                 GameManagers.ManagerSingleton.ActivePause();
-            }else{
+            }
+            else
+            {
                 GameManagers.ManagerSingleton.Countinue();
             }
         }
@@ -70,10 +77,14 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = Mathf.Clamp(moveSpeed, minMoveSpeed, maxMoveSpeed);
     }
 
-    public void ChangeJumpForce(float amount){
-        if(amount > 0){
+    public void ChangeJumpForce(float amount)
+    {
+        if (amount > 0)
+        {
             jumpForce += jumpForceChange;
-        }else{
+        }
+        else
+        {
             jumpForce -= jumpForceChange;
         }
 
