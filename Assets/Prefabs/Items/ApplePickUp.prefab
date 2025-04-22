@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 590819609580358286}
   - component: {fileID: 3674394767545062926}
   - component: {fileID: 2869841809816463699}
+  - component: {fileID: -3571178584108080641}
   m_Layer: 0
   m_Name: ApplePickUp
   m_TagString: Untagged
@@ -79,8 +80,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7421f6da2c5ff1d419125a2515cfea3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshProUGUI: {fileID: 0}
-  score: 50
   rotationSpeed: 100
   speedUp: 1.5
 --- !u!65 &3674394767545062926
@@ -127,6 +126,18 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 1.01, z: 0}
+--- !u!114 &-3571178584108080641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7330009822224280591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94480c774b706804e9711c057df90dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3118954028463453314
 PrefabInstance:
   m_ObjectHideFlags: 0

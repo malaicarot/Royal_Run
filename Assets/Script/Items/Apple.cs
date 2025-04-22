@@ -4,7 +4,7 @@ public class Apple : PickUp
 {
     LevelGenerator levelGenerator;
     [SerializeField] float speedUp = 2;
-    
+
     public void Init(LevelGenerator levelGenerator)
     {
         this.levelGenerator = levelGenerator;

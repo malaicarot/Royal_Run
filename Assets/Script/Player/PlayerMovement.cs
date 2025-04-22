@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
                 jumpTimer = 0;
                 currentPos = transform.position;
             }
-
         }
     }
 

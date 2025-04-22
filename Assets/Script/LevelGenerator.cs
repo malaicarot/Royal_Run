@@ -71,6 +71,7 @@ public class LevelGenerator : MonoBehaviour
             if (chunkObject.transform.position.z <= Camera.main.transform.position.z - 5f)
             {
                 chunks.Remove(chunkObject);
+
                 Destroy(chunkObject);
                 SpawnChunk(CalculatePosition());
             }

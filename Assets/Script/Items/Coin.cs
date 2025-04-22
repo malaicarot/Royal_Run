@@ -7,6 +7,5 @@ public class Coin : PickUp
     {
         GameManagers.ManagerSingleton.AddScore(10);
         SoundManagers.soundManagersSingleTon.SFXSound(1);
-
     }
 }

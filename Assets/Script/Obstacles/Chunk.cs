@@ -47,7 +47,10 @@ public class Chunk : MonoBehaviour
         if (availableLane.Count <= 0 || Random.value > applePercentage) return;
         int selectedLane = AvailablePosition();
         Vector3 spawnPosition = new Vector3(lanes[selectedLane], transform.position.y, transform.position.z);
-        Apple newApple = Instantiate(applePrefab, spawnPosition, Quaternion.identity, this.transform).GetComponent<Apple>();
+        
+        ItemMarkPool item = ItemPool.ItemPoolSingleton.GetItem(applePrefab.name, spawnPosition, Quaternion.identity);
+        Apple newApple = item.GetComponent<Apple>();
+        newApple.transform.SetParent(this.transform);
         newApple.Init(levelGenerator);
     }
 
@@ -60,10 +63,12 @@ public class Chunk : MonoBehaviour
         int selectedLane = AvailablePosition();
         for (int i = 0; i < coinTospawn; i++)
         {
-            float zPositionSpawn =  topOffChunkZPos - (i * zPositionValueCoin);
-
+            float zPositionSpawn = topOffChunkZPos - (i * zPositionValueCoin);
             Vector3 spawnPosition = new Vector3(lanes[selectedLane], transform.position.y, zPositionSpawn);
-            Instantiate(coinPrefab, spawnPosition, Quaternion.identity, this.transform);
+
+            ItemMarkPool item = ItemPool.ItemPoolSingleton.GetItem(coinPrefab.name, spawnPosition, Quaternion.identity);
+            Coin newCoin = item.GetComponent<Coin>();
+            newCoin.transform.SetParent(this.transform);
         }
     }
 

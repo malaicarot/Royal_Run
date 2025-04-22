@@ -14,7 +14,8 @@ public abstract class PickUp : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             OnPickUp();
-            Destroy(gameObject);
+            ItemMarkPool itemMarkPool = GetComponent<ItemMarkPool>();
+            itemMarkPool.Release();
         }
     }
 

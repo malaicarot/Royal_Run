@@ -49,8 +49,6 @@ public class GameManagers : MonoBehaviour
         leftTime = startTime;
         GetHighestScore();
         SoundManagers.soundManagersSingleTon.BackgroundMusic();
-        
-
     }
 
     void Update()
