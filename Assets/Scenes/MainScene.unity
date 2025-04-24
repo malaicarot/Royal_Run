@@ -148,13 +148,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3267bdb4c9e856849ac873a570144d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chunkObjPool: {fileID: 1197429933}
   cameraController: {fileID: 669433547}
   chunkPrefabs:
-  - {fileID: 3823864561415990359, guid: c3a9bf1194fbbd44da67e9122e8c7409, type: 3}
-  - {fileID: 6676404491241095695, guid: a242a5efd0bc4d94d9c40c238e08f1a8, type: 3}
-  - {fileID: 6676404491241095695, guid: 8743d97c397001a4490cd75552dfaacb, type: 3}
-  - {fileID: 6676404491241095695, guid: 1de892dc988f49149b656f9569d95560, type: 3}
-  chunkCheckPointPrefab: {fileID: 6676404491241095695, guid: 245c1529f7f4dc646850b52bc7955809, type: 3}
+  - Chunk
+  - LightPointBoth
+  - LightPointLeft
+  - LightPointRight
+  chunkCheckPointPrefab: CheckPoint
   chunkParent: {fileID: 1406259687}
   playerMovement: {fileID: 463509743}
   chunkQuantity: 12
@@ -16529,13 +16530,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1197429930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd0f5ca637e0ca4c9e4bd09951344f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 655423c4fbd2c694db8709eecea7aa38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   poolSize: 10
   pooledList:
-  - {fileID: -4679946338680981426, guid: 457b8c6e722f43c4ba699e35f45f2673, type: 3}
+  - {fileID: -7214707498622070903, guid: c3a9bf1194fbbd44da67e9122e8c7409, type: 3}
+  - {fileID: 8238904289516380625, guid: a242a5efd0bc4d94d9c40c238e08f1a8, type: 3}
+  - {fileID: 8238904289516380625, guid: 8743d97c397001a4490cd75552dfaacb, type: 3}
+  - {fileID: 8238904289516380625, guid: 1de892dc988f49149b656f9569d95560, type: 3}
+  - {fileID: 8238904289516380625, guid: 245c1529f7f4dc646850b52bc7955809, type: 3}
   - {fileID: -3571178584108080641, guid: 105f855e6ab4a9040a2078e0c1cf7b42, type: 3}
+  - {fileID: -4679946338680981426, guid: 457b8c6e722f43c4ba699e35f45f2673, type: 3}
 --- !u!1 &1278665853
 GameObject:
   m_ObjectHideFlags: 0
@@ -16567,7 +16573,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacle:
   - {fileID: 356189271236020746, guid: 7bc8b40ad785f4646bd85a748ad4f536, type: 3}
-  - {fileID: 8297427850115300800, guid: d79cb4ec6a53ac14c9b77c9ace7327d2, type: 3}
   - {fileID: 6522767492901176970, guid: 7ff328a68b0910d46b30ab255b4a44a3, type: 3}
   - {fileID: 2228809510353479235, guid: 97c017f7afc1087418df35f8e757f89a, type: 3}
   - {fileID: 1845802975365795930, guid: 0cb3146960013fd47902217911ea5da9, type: 3}

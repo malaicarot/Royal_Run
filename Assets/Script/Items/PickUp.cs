@@ -14,8 +14,8 @@ public abstract class PickUp : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             OnPickUp();
-            ItemMarkPool itemMarkPool = GetComponent<ItemMarkPool>();
-            itemMarkPool.Release();
+            PooledObject pooledObject = this.GetComponent<PooledObject>();
+            pooledObject.Release();
         }
     }
 

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class ObjectPool : MonoBehaviour
     Dictionary<string, Stack<PooledObject>> poolDictionary;
 
 
-    void Start()
+    void Awake()
     {
         SetupPool();
     }
@@ -25,6 +24,7 @@ public class ObjectPool : MonoBehaviour
         poolDictionary = new Dictionary<string, Stack<PooledObject>>();
         foreach (var objectPool in pooledList)
         {
+
             Stack<PooledObject> stackPool = new Stack<PooledObject>();
             for (int i = 0; i < poolSize; i++)
             {

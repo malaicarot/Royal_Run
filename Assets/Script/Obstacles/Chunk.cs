@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class Chunk : MonoBehaviour
 {
+
     [SerializeField] GameObject fencePrefab;
     [SerializeField] GameObject applePrefab;
     [SerializeField] GameObject coinPrefab;
 
     LevelGenerator levelGenerator;
+    PooledObject pooledObject;
 
 
     [SerializeField] float[] lanes = { -2.5f, 0, 2.5f };
@@ -19,6 +21,7 @@ public class Chunk : MonoBehaviour
 
     void Start()
     {
+        pooledObject = GetComponent<PooledObject>();
         SpawnFences();
         SpawnApples();
         SpawnCoins();
@@ -47,8 +50,10 @@ public class Chunk : MonoBehaviour
         if (availableLane.Count <= 0 || Random.value > applePercentage) return;
         int selectedLane = AvailablePosition();
         Vector3 spawnPosition = new Vector3(lanes[selectedLane], transform.position.y, transform.position.z);
-        
-        ItemMarkPool item = ItemPool.ItemPoolSingleton.GetItem(applePrefab.name, spawnPosition, Quaternion.identity);
+
+        PooledObject item = pooledObject._pool.GetPooledObject(applePrefab.name);
+        item.transform.position = spawnPosition;
+        item.transform.rotation = Quaternion.identity;        
         Apple newApple = item.GetComponent<Apple>();
         newApple.transform.SetParent(this.transform);
         newApple.Init(levelGenerator);
@@ -66,9 +71,13 @@ public class Chunk : MonoBehaviour
             float zPositionSpawn = topOffChunkZPos - (i * zPositionValueCoin);
             Vector3 spawnPosition = new Vector3(lanes[selectedLane], transform.position.y, zPositionSpawn);
 
-            ItemMarkPool item = ItemPool.ItemPoolSingleton.GetItem(coinPrefab.name, spawnPosition, Quaternion.identity);
+
+            PooledObject item = pooledObject._pool.GetPooledObject(coinPrefab.name);
+            item.transform.position = spawnPosition;
+            item.transform.rotation = Quaternion.identity;
             Coin newCoin = item.GetComponent<Coin>();
             newCoin.transform.SetParent(this.transform);
+            
         }
     }
 
@@ -79,5 +88,10 @@ public class Chunk : MonoBehaviour
         int selectedLane = availableLane[randomXIndex];
         availableLane.RemoveAt(randomXIndex);
         return selectedLane;
+    }
+
+    public void ReturnToPool()
+    {
+        pooledObject.Release();
     }
 }

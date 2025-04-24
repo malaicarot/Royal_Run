@@ -1,15 +1,15 @@
 using System.Collections.Generic;
-// using Unity.Burst.Intrinsics;
 using UnityEngine;
-// using UnityEngine.UIElements;
 
 public class LevelGenerator : MonoBehaviour
 {
 
+    [SerializeField] ObjectPool chunkObjPool;
+
     [Header("References")]
     [SerializeField] CameraLensFOV cameraController;
-    [SerializeField] GameObject[] chunkPrefabs;
-    [SerializeField] GameObject chunkCheckPointPrefab;
+    [SerializeField] string[] chunkPrefabs;
+    [SerializeField] string chunkCheckPointPrefab;
     [SerializeField] Transform chunkParent;
     [SerializeField] PlayerMovement playerMovement;
 
@@ -71,11 +71,10 @@ public class LevelGenerator : MonoBehaviour
             if (chunkObject.transform.position.z <= Camera.main.transform.position.z - 5f)
             {
                 chunks.Remove(chunkObject);
-
-                Destroy(chunkObject);
+                Chunk chunk = chunkObject.GetComponent<Chunk>();
+                chunk.ReturnToPool();
                 SpawnChunk(CalculatePosition());
             }
-
         }
     }
 
@@ -95,14 +94,14 @@ public class LevelGenerator : MonoBehaviour
         return zPosition;
     }
 
-    GameObject ChunkToSpawn()
+    string ChunkToSpawn()
     {
         if (chunkCount % chunkInterval == 0 && chunkCount != 0)
         {
             chunkCount = 0;
             return chunkCheckPointPrefab;
         }
-        GameObject chunkToSpanw = chunkPrefabs[Random.Range(0, chunkPrefabs.Length)];
+        string chunkToSpanw = chunkPrefabs[Random.Range(0, chunkPrefabs.Length)];
         return chunkToSpanw;
     }
 
@@ -110,8 +109,12 @@ public class LevelGenerator : MonoBehaviour
     {
         chunkCount++;
         Vector3 direction = new Vector3(0, 0, zValue);
-        GameObject newchunkGO = Instantiate(ChunkToSpawn(), direction, Quaternion.identity, chunkParent);
-        chunks.Add(newchunkGO);
+        PooledObject newchunkGO = chunkObjPool.GetPooledObject(ChunkToSpawn());
+
+        newchunkGO.transform.position = direction;
+        newchunkGO.transform.rotation = Quaternion.identity;
+        newchunkGO.transform.SetParent(chunkParent);
+        chunks.Add(newchunkGO.gameObject);
         Chunk newChunk = newchunkGO.GetComponent<Chunk>();
         newChunk.Init(this);
     }

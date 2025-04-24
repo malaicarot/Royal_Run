@@ -166,7 +166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3823864561415990359, guid: c3a9bf1194fbbd44da67e9122e8c7409, type: 3}
       propertyPath: m_Name
-      value: LightPoint Left
+      value: LightPointLeft
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
