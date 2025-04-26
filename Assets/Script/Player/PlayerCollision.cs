@@ -1,30 +1,28 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCollision : MonoBehaviour
+public class PlayerCollision : Subject
 {
-    const string hitString = "Hit";
-    [SerializeField] Animator animator;
-    [SerializeField] float speedDown = -2;
-    LevelGenerator levelGenerator;
-    float countDown = 1f;
-    float timer = 0;
+    const string apple = "ApplePickUp";
+    const string coin = "CoinPickUp";
 
-    void Start()
-    {
-        levelGenerator = FindFirstObjectByType<LevelGenerator>();
-    }
-
-    void Update()
-    {
-        timer += Time.deltaTime;
-    }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (timer < countDown) return;
-        levelGenerator.ChangeMoveSpeed(speedDown);
-        animator.SetTrigger(hitString);
-        GameManagers.ManagerSingleton.AddScore(-5);
-        timer = 0;
+        OnNotifyObserver(PlayerAction.Blocked);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.name == apple)
+        {
+            OnNotifyObserver(PlayerAction.PickedApple);
+        }
+        else if (other.name == coin)
+        {
+            OnNotifyObserver(PlayerAction.PickedCoin);
+
+        }
+
     }
 }

@@ -13,7 +13,5 @@ public class Apple : PickUp
     protected override void OnPickUp()
     {
         levelGenerator.ChangeMoveSpeed(speedUp);
-        GameManagers.ManagerSingleton.AddScore(5);
-        SoundManagers.soundManagersSingleTon.SFXSound(0);
     }
 }

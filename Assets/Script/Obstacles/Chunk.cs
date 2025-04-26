@@ -5,8 +5,10 @@ public class Chunk : MonoBehaviour
 {
 
     [SerializeField] GameObject fencePrefab;
-    [SerializeField] GameObject applePrefab;
-    [SerializeField] GameObject coinPrefab;
+    [SerializeField] string apple = "";
+    [SerializeField] string coin = "";
+    
+    
 
     LevelGenerator levelGenerator;
     PooledObject pooledObject;
@@ -51,7 +53,7 @@ public class Chunk : MonoBehaviour
         int selectedLane = AvailablePosition();
         Vector3 spawnPosition = new Vector3(lanes[selectedLane], transform.position.y, transform.position.z);
 
-        PooledObject item = pooledObject._pool.GetPooledObject(applePrefab.name);
+        PooledObject item = pooledObject._pool.GetPooledObject(apple);
         item.transform.position = spawnPosition;
         item.transform.rotation = Quaternion.identity;        
         Apple newApple = item.GetComponent<Apple>();
@@ -72,7 +74,7 @@ public class Chunk : MonoBehaviour
             Vector3 spawnPosition = new Vector3(lanes[selectedLane], transform.position.y, zPositionSpawn);
 
 
-            PooledObject item = pooledObject._pool.GetPooledObject(coinPrefab.name);
+            PooledObject item = pooledObject._pool.GetPooledObject(coin);
             item.transform.position = spawnPosition;
             item.transform.rotation = Quaternion.identity;
             Coin newCoin = item.GetComponent<Coin>();

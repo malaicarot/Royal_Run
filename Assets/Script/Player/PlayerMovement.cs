@@ -26,10 +26,13 @@ public class PlayerMovement : MonoBehaviour
 
 
     void Awake()
-
     {
         playerRb = GetComponent<Rigidbody>();
     }
+    // void Start()
+    // {
+    //     OnNotifyObserver();
+    // }
     public void Move(InputAction.CallbackContext context)
     {
         movement = context.ReadValue<Vector2>();
